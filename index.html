@@ -145,6 +145,25 @@
       background:#020617;
     }
 
+    /* ADMIN BUTTON */
+
+    .admin-btn{
+      position:fixed;
+      bottom:15px;
+      right:20px;
+      color:gray;
+      font-size:13px;
+      cursor:pointer;
+      opacity:0.5;
+      transition:0.3s;
+      user-select:none;
+    }
+
+    .admin-btn:hover{
+      opacity:1;
+      color:#38bdf8;
+    }
+
     @media(max-width:768px){
 
       .hero h1{
@@ -199,7 +218,8 @@
     <h2>About Me</h2>
 
     <p>
-      Аз съм Борис — запален по гейминг общностите и изграждането на сървъри. От малък ме привлича светът на Minecraft и Discord, и с времето превърнах хобито си в нещо, с което помагам на другите.
+      Аз съм Борис — запален по гейминг общностите и изграждането на сървъри.
+      От малък ме привлича светът на Minecraft и Discord.
     </p>
 
   </div>
@@ -218,7 +238,7 @@
 
       <div class="project-card">
         <h3>Website Project</h3>
-        <p>Chat gpt ми помогна за това portfolio.</p>
+        <p>ChatGPT ми помогна за това portfolio.</p>
       </div>
 
     </div>
@@ -228,7 +248,7 @@
 </section>
 
 <!-- CONTACT -->
-  
+
 <section id="contact">
 
   <div class="contact">
@@ -253,12 +273,22 @@
   © 2026 My Portfolio
 </footer>
 
+<!-- ADMIN BUTTON -->
+
+<div class="admin-btn" onclick="goToAdmin()">
+  admin
+</div>
+
 <script>
 
   function scrollToProjects(){
     document.getElementById("projects").scrollIntoView({
       behavior:"smooth"
     });
+  }
+
+  function goToAdmin(){
+    window.location.href = "admin.html";
   }
 
 </script>
