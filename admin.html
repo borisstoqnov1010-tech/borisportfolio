@@ -9,23 +9,26 @@
 
     body{
       margin:0;
-      font-family:Arial;
       background:#0f172a;
       color:white;
-      text-align:center;
-      padding-top:100px;
+      font-family:Arial;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
     }
 
     .panel{
-      width:400px;
-      margin:auto;
       background:#111827;
-      padding:40px;
+      padding:50px;
       border-radius:20px;
+      text-align:center;
+      width:400px;
     }
 
     h1{
       color:#38bdf8;
+      margin-bottom:20px;
     }
 
     button{
@@ -47,19 +50,19 @@
 
   <h1>ADMIN PANEL</h1>
 
-  <p>Добре дошъл в admin panel-а.</p>
+  <p>Добре дошъл, Борис.</p>
 
   <button onclick="logout()">
-    Logout
+    Назад
   </button>
 
 </div>
 
 <script>
 
-  function logout(){
-    window.location.href = "index.html";
-  }
+function logout(){
+  window.location.href = "index.html";
+}
 
 </script>
 
