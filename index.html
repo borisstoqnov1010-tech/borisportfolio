@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>На Борис Portfolio</title>
 
-  <!-- 🔥 ВАЖНО: връзка към CSS файла -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -61,9 +60,17 @@
   <div class="contact">
     <h2>Contact</h2>
 
-    <input type="text" placeholder="Име">
-    <input type="email" placeholder="Email">
-    <textarea rows="5" placeholder="Съобщение"></textarea>
+    <input type="text" id="name" placeholder="Име">
+    <input type="email" id="email" placeholder="Email">
+    <textarea rows="5" id="message" placeholder="Съобщение"></textarea>
+
+    <!-- 🔥 БУТОН -->
+    <button class="btn" onclick="sendMessage()">
+      Изпрати
+    </button>
+
+    <p id="status"></p>
+
   </div>
 </section>
 
@@ -72,9 +79,34 @@
 </footer>
 
 <script>
+
 function scrollToProjects(){
   document.getElementById("projects")
     .scrollIntoView({behavior:"smooth"});
+}
+
+/* CONTACT SEND FUNCTION */
+function sendMessage(){
+
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let message = document.getElementById("message").value;
+  let status = document.getElementById("status");
+
+  if(name === "" || email === "" || message === ""){
+
+    status.style.color = "red";
+    status.innerText = "Моля попълни всички полета!";
+
+  } else {
+
+    status.style.color = "#38bdf8";
+    status.innerText = "Съобщението е изпратено!";
+
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "";
+  }
 }
 
 /* LOAD EXTRA PROJECTS */
@@ -95,6 +127,7 @@ savedProjects.forEach(project => {
 
   projectsGrid.appendChild(card);
 });
+
 </script>
 
 </body>
