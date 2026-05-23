@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>Inbox</title>
+
+  <style>
+    body{
+      background:#0f172a;
+      color:white;
+      font-family:Arial;
+      padding:30px;
+    }
+
+    h1{
+      color:#38bdf8;
+    }
+
+    .msg{
+      background:#1e293b;
+      padding:15px;
+      margin:10px 0;
+      border-radius:10px;
+    }
+
+    button{
+      border:none;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      margin-right:5px;
+    }
+
+    .delete{
+      background:red;
+      color:white;
+    }
+
+    .reply{
+      background:#38bdf8;
+      color:white;
+    }
+
+    .replyBox{
+      margin-top:10px;
+      display:none;
+    }
+
+    textarea{
+      width:100%;
+      height:60px;
+      margin-top:8px;
+      border-radius:8px;
+      border:none;
+      padding:8px;
+    }
+
+    .send{
+      background:green;
+      color:white;
+      margin-top:5px;
+    }
+
+    .replyText{
+      margin-top:10px;
+      padding:10px;
+      background:#0f172a;
+      border-left:3px solid #38bdf8;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Inbox System</h1>
+
+<div id="list"></div>
+
+<script>
+
+let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+let list = document.getElementById("list");
+
+function save(){
+  localStorage.setItem("messages", JSON.stringify(messages));
+}
+
+function load(){
+
+  list.innerHTML = "";
+
+  messages.forEach((m, index) => {
+
+    let div = document.createElement("div");
+    div.className = "msg";
+
+    div.innerHTML = `
+      <b>${m.name}</b> (${m.email})<br><br>
+      ${m.message}<br><br>
+      <small>${m.time}</small>
+
+      <div style="margin-top:10px;">
+        <button class="delete" onclick="deleteMsg(${index})">Delete</button>
+        <button class="reply" onclick="toggleReply(${index})">Reply</button>
+      </div>
+
+      <div class="replyBox" id="reply-${index}">
+        <textarea id="text-${index}" placeholder="Напиши отговор..."></textarea>
+        <button class="send" onclick="sendReply(${index})">Send</button>
+      </div>
+
+      ${m.reply ? `<div class="replyText">📩 Reply: ${m.reply}</div>` : ""}
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+function deleteMsg(index){
+  messages.splice(index, 1);
+  save();
+  load();
+}
+
+function toggleReply(index){
+
+  let box = document.getElementById("reply-" + index);
+
+  if(box.style.display === "block"){
+    box.style.display = "none";
+  } else {
+    box.style.display = "block";
+  }
+}
+
+function sendReply(index){
+
+  let text = document.getElementById("text-" + index).value;
+
+  if(text === "") return;
+
+  messages[index].reply = text;
+
+  save();
+  load();
+}
+
+load();
+
+</script>
+
+</body>
+</html>
