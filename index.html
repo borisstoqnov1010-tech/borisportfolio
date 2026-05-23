@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>На Борис Portfolio</title>
 
-<head><link rel="stylesheet" href="style.css"></head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
 
 <header>
@@ -25,9 +27,12 @@
 
 <section class="hero" id="home">
 
-  <h1>Здравей, аз съм <span>Борис</span></h1>
+  <h1>
+    Здравей, аз съм
+    <span id="portfolioName">Борис</span>
+  </h1>
 
-  <p>
+  <p id="portfolioHero">
     Здрасти, аз съм начинаещ уча още python.
   </p>
 
@@ -45,7 +50,7 @@
 
     <h2>About Me</h2>
 
-    <p>
+    <p id="portfolioAbout">
       Аз съм Борис — запален по гейминг общностите и изграждането на сървъри.
       От малък ме привлича светът на Minecraft и Discord.
     </p>
@@ -65,8 +70,13 @@
     <div class="projects-grid">
 
       <div class="project-card">
+
         <h3>Website Project</h3>
-        <p>ChatGPT ми помогна за това portfolio.</p>
+
+        <p id="portfolioProject">
+          ChatGPT ми помогна за това portfolio.
+        </p>
+
       </div>
 
     </div>
@@ -103,8 +113,70 @@
 
 <!-- ADMIN BUTTON -->
 
-<div class="admin-btn" onclick="goToAdmin()">
+<div class="admin-btn" onclick="openAdminLogin()">
   admin
+</div>
+
+<!-- ADMIN LOGIN -->
+
+<div id="adminLoginBox" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#1f0829;
+padding:30px;
+border-radius:20px;
+width:320px;
+z-index:9999;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+">
+
+  <h2 style="
+  text-align:center;
+  margin-bottom:20px;
+  color:#d946ef;
+  ">
+    Admin Login
+  </h2>
+
+  <input
+    type="password"
+    id="adminPassword"
+    placeholder="Password"
+    style="
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#2a1036;
+    color:white;
+    margin-bottom:15px;
+    "
+  >
+
+  <button
+    onclick="checkAdminPassword()"
+    style="
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#c026d3;
+    color:white;
+    cursor:pointer;
+    "
+  >
+    Login
+  </button>
+
+  <p id="adminError" style="
+  color:red;
+  text-align:center;
+  margin-top:10px;
+  "></p>
+
 </div>
 
 <script>
@@ -115,9 +187,44 @@
     });
   }
 
-  function goToAdmin(){
-    window.location.href = "admin.html";
+  function openAdminLogin(){
+    document.getElementById("adminLoginBox").style.display = "block";
   }
+
+  function checkAdminPassword(){
+
+    let password =
+      document.getElementById("adminPassword").value;
+
+    if(password === "Borko1010"){
+
+      window.location.href = "admin.html";
+
+    } else {
+
+      document.getElementById("adminError").innerHTML =
+      "Грешна парола!";
+
+    }
+
+  }
+
+  // LOAD SAVED CONTENT
+
+  document.getElementById("portfolioName").innerHTML =
+    localStorage.getItem("portfolioName") || "Борис";
+
+  document.getElementById("portfolioHero").innerHTML =
+    localStorage.getItem("portfolioHero") ||
+    "Здрасти, аз съм начинаещ уча още python.";
+
+  document.getElementById("portfolioAbout").innerHTML =
+    localStorage.getItem("portfolioAbout") ||
+    "Аз съм Борис.";
+
+  document.getElementById("portfolioProject").innerHTML =
+    localStorage.getItem("portfolioProject") ||
+    "ChatGPT ми помогна за това portfolio.";
 
 </script>
 
