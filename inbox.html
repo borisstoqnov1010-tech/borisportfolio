@@ -25,7 +25,18 @@
 
   <h1>Inbox</h1>
 
-  <button onclick="clearMessages()" class="deleteBtn">Clear All</button>
+  <!-- 🔥 TOP BUTTONS -->
+  <div class="topBtns">
+    
+    <button onclick="goHome()" class="homeBtn">
+      🏠 Home
+    </button>
+
+    <button onclick="clearMessages()" class="deleteBtn">
+      Clear All
+    </button>
+
+  </div>
 
   <div id="list"></div>
 
@@ -49,6 +60,11 @@ function login(){
   } else {
     document.getElementById("err").innerText = "Грешна парола!";
   }
+}
+
+/* 🔥 HOME BUTTON */
+function goHome(){
+  window.location.href = "index.html";
 }
 
 /* MESSAGES */
